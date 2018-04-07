@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"strconv"
+	"os"
 )
 
 type NearbyStops struct {
@@ -20,7 +21,7 @@ type StopLocation struct {
 	Dist string `json:"dist"`
 }
 
-const apiKey = "28b7e5e14d3049e8afa45f48aa8630a8"
+var apiKey = os.Getenv("NEARBYSTOPS_KEY")
 const maxresults = 5
 const radius = 2000
 
