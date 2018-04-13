@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"os"
+	"fmt"
 )
 
 type NearbyStops struct {
@@ -40,8 +41,12 @@ func nearbyStops(lat float64, long float64) (NearbyStops, error) {
 
 	defer resp.Body.Close()
 
-	var d NearbyStops
+	Info.Println("http response: ", resp.Status)
+	if resp.StatusCode != 200 {
+		return NearbyStops{}, fmt.Errorf("Response: ", resp.Status)
+	}
 
+	var d NearbyStops
 	if err := json.NewDecoder(resp.Body).Decode(&d); err != nil {
 		return NearbyStops{}, err
 	}

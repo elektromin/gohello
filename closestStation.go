@@ -65,7 +65,6 @@ func closestStation(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(ns.LocationList.StopLocations) == 0 {
-		Error.Println("error: ", err)
 		http.Error(w, "", http.StatusNotFound)
 		return
 	}
