@@ -1,4 +1,10 @@
-FROM alpine:3.1
+FROM golang:1.10
 MAINTAINER Anders Romin <elektromin@hotmail.com>
-ADD gohello /usr/bin/gohello
-ENTRYPOINT ["gohello"]
+
+WORKDIR /go/src/github.com/elektromin/gohello
+COPY . .
+
+RUN go get -d -v ./...
+RUN go install -v ./...
+
+CMD ["gohello"]
